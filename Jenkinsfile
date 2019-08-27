@@ -18,8 +18,8 @@ node('soyoung-jnlp') {
     }
     stage('Push') {
         echo "4.Push Docker Image Stage"
-        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-            sh "docker login -u ${dockerHubUser} -p ${dockerHubPassword}"
+        withCredentials([usernamePassword(credentialsId: 'dockerAliyun', passwordVariable: 'dockerAliyunPassword', usernameVariable: 'dockerAliyunUser')]) {
+            sh "docker login -u ${dockerAliyunUser} -p ${dockerAliyunPassword}"
             sh "docker push cnych/jenkins-demo:${build_tag}"
         }
     }
