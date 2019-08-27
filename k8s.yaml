@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - image: registry-vpc.cn-beijing.aliyuncs.com/sy-ops/jenkins-demo:<BUILD_TAG>
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         name: jenkins-demo
         env:
         - name: branch
