@@ -14,13 +14,13 @@ node('soyoung-jnlp') {
     }
     stage('Build') {
         echo "3.Build Docker Image Stage"
-        sh "docker build -t cnych/jenkins-demo:${build_tag} ."
+        sh "docker build -t registry-vpc.cn-beijing.aliyuncs.com/sy-ops/jenkins-demo:${build_tag} ."
     }
     stage('Push') {
         echo "4.Push Docker Image Stage"
         withCredentials([usernamePassword(credentialsId: 'dockerAliyun', passwordVariable: 'dockerAliyunPassword', usernameVariable: 'dockerAliyunUser')]) {
             sh "docker login -u ${dockerAliyunUser} -p ${dockerAliyunPassword}"
-            sh "docker push cnych/jenkins-demo:${build_tag}"
+            sh "docker push registry-vpc.cn-beijing.aliyuncs.com/sy-ops/jenkins-demo:${build_tag}"
         }
     }
     stage('Deploy') {
