@@ -16,3 +16,22 @@ spec:
         env:
         - name: branch
           value: <BRANCH_NAME>
+        ports:
+          - containerPort: 9090
+            name: web
+            protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jenkins-demo
+  namespace: default
+  labels:
+    app: jenkins-demo
+spec:
+  type: NodePort
+  ports:
+    - name: web
+      port: 9090
+      targetPort: web
+      nodePort: 39090
