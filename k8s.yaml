@@ -5,8 +5,6 @@ metadata:
   namespace: default
 spec:
   replicas: 1
-  nodeSelector:
-    project: ops
   template:
     metadata:
       labels:
@@ -16,13 +14,12 @@ spec:
       - image: registry-vpc.cn-beijing.aliyuncs.com/sy-ops/jenkins-demo:<BUILD_TAG>
         imagePullPolicy: Always
         name: jenkins-demo
+        ports:
+          - containerPort: 9090
         env:
         - name: branch
           value: <BRANCH_NAME>
-        ports:
-          - containerPort: 9090
-            name: web
-            protocol: TCP
+
 ---
 apiVersion: v1
 kind: Service
