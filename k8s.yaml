@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: jenkins-demo
+  namespace: default
 spec:
   replicas: 2
   template:
@@ -24,6 +25,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: jenkins-demo-service
+  namespace: default
 spec:
   selector:
     app: jenkins-demo   
@@ -36,6 +38,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: jenkins-demo-ingress
+  namespace: default
   annotations:
     ingress.kubernetes.io/rewrite-target: /
 spec:
