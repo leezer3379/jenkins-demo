@@ -4,7 +4,9 @@ metadata:
   name: jenkins-demo
   namespace: default
 spec:
-
+  replicas: 1
+  nodeSelector:
+    project: ops
   template:
     metadata:
       labels:
@@ -30,12 +32,10 @@ metadata:
   labels:
     app: jenkins-demo
 spec:
-  type: NodePort
   ports:
     - name: web
       port: 9090
       targetPort: 9090
-      nodePort: 30210
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
