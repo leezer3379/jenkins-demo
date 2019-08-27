@@ -33,5 +33,5 @@ spec:
   ports:
     - name: web
       port: 9090
-      targetPort: web
+      targetPort: 9090
       nodePort: 39090
