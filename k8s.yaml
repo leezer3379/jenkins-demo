@@ -30,7 +30,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: jenkins-demo-ingress
+  name: jenkins-demo-service
   namespace: default
 spec:
   type: NodePort
