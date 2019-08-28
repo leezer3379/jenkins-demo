@@ -5,7 +5,7 @@ node('soyoung-jnlp') {
         script {
             build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
             if (env.BRANCH_NAME != 'master') {
-                sh('git checkout ${env.BRANCH_NAME}')
+                sh "git checkout ${env.BRANCH_NAME}"
                 build_tag = "${env.BRANCH_NAME}-${build_tag}"
             }
         }
