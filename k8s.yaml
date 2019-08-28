@@ -14,6 +14,8 @@ spec:
       labels:
         app: jenkins-demo
     spec:
+      nodeSelector:
+        prod=webserver
       containers:
       - image: registry-vpc.cn-beijing.aliyuncs.com/sy-ops/jenkins-demo:<BUILD_TAG>
         imagePullPolicy: Always
