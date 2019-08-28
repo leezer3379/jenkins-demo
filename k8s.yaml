@@ -30,7 +30,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: jenkins-demo-service
+  name: jenkins-demo-ingress
   namespace: default
 spec:
   type: NodePort
@@ -41,6 +41,7 @@ spec:
       port: 9090
       targetPort: 9090
       nodePort: 30210
+
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -48,13 +49,13 @@ metadata:
   name: jenkins-demo-ingress
   namespace: default
   annotations:
-    kubernetes.io/ingress.class: "nginx"
+    ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
     - host: demo.sy.soyoung.com
       http:
         paths:
-          - path:
+          - path: /
             backend:
               serviceName: jenkins-demo-service
               servicePort: 9090
