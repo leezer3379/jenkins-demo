@@ -1,11 +1,11 @@
 package main
 
 import (
-"fmt"
-"net/http"
+	"fmt"
+	"net/http"
 	"os"
 	"strings"
-"log"
+	"log"
 )
 
 func sayhelloName(w http.ResponseWriter, r *http.Request) {
