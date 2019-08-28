@@ -1,7 +1,7 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: jenkins-demo
+  name: jenkins-demo-deployment
   namespace: default
 spec:
   replicas: 3
