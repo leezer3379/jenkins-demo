@@ -19,7 +19,7 @@ func sayhelloName(w http.ResponseWriter, r *http.Request) {
 		fmt.Println("val:", strings.Join(v, ""))
 	}
 
-	fmt.Fprintf(w, "Hello, Kubernetes！I'm from Jenkins CI！ \nbranch: " + os.Getenv("branch")) //这个写入到w的是输出到客户端的
+	fmt.Fprintf(w, "Hello, Kubernetes！I'm from Jenkins CI！ Version 1\nbranch: " + os.Getenv("branch")) //这个写入到w的是输出到客户端的
 }
 
 func main() {
