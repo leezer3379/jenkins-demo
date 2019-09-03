@@ -1,5 +1,5 @@
-if(Action=="deploy") {
-
+if("${env.Action}"=="deploy") {
+    echo "ok"
 } else {
     echo "${Action}"
 }
