@@ -1,6 +1,6 @@
 node('k8s-slave') {
     input message: '', parameters: [choice(choices: ['deploy', 'rollback'], description: 'xu', name: 'Action'), text(defaultValue: '', description: '', name: 'Tag')]
-    if(parameters.Action=="delopy"){
+    if(params.Action=="delopy"){
         stage('Prepare') {
             echo "1.Prepare Stage"
             checkout scm
@@ -24,13 +24,13 @@ node('k8s-slave') {
             sh "sed -i 's/<BUILD_TAG>/${build_tag}/' k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
         }
-    } else if(parameters.Action=="rollback" && parameters.Tag!="") {
+    } else if(params.Action=="rollback" && params.Tag!="") {
         stage("Rollback"){
             echo "${Tag} rollbacking...."
             sh "sed -i 's/<BUILD_TAG>/${Tag}/' k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
         }
-    } else if (parameters.Tag=="123"){
+    } else if (params.Tag=="123"){
         stage("Debug"){
             echo "Tag: ${Tag}"
             echo "Action: ${Action}"
