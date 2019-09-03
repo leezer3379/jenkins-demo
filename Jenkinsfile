@@ -5,6 +5,7 @@ node('k8s-slave') {
             checkout scm
             script {
                 build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+                echo "${build_tag} sdeploying...."
             }
         }
         stage('Build') {
@@ -22,7 +23,6 @@ node('k8s-slave') {
             echo "4. Deploy Stage"
             sh "sed -i 's/<BUILD_TAG>/${build_tag}/g' k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
-            sh "grep -R 'registry-vpc.cn-beijing.aliyuncs.com' k8s.yaml| awk '{print \$4}' "
         }
     } else if("${env.Action}"=="rollback" && Tag!="") {
         stage("Rollback"){
