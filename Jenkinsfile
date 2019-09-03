@@ -1,4 +1,5 @@
 node('k8s-slave') {
+    input message: '', parameters: [choice(choices: ['deploy', 'rollback'], description: 'xu', name: 'Action'), text(defaultValue: '', description: '', name: 'Tag')]
     if(env.Action=="delopy"){
         stage('Prepare') {
             echo "1.Prepare Stage"
