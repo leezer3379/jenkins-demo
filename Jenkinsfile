@@ -5,8 +5,10 @@ node('k8s-slave') {
             checkout scm
             script {
                 build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
+                echo "======================================"
                 echo "${build_tag} sdeploying...."
-                echo "\033[32m[ tomcat started success on ${build_tag} !  ]\033[0m"
+                echo "======================================"
+
             }
         }
         stage('Build') {
@@ -28,7 +30,10 @@ node('k8s-slave') {
     } else if("${env.Action}"=="rollback" && Tag!="") {
         stage("Rollback"){
             checkout scm
+            echo "======================================"
             echo "${Tag} rollbacking...."
+            echo "======================================"
+
             sh "sed -i 's/<BUILD_TAG>/${Tag}/g' k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
         }
