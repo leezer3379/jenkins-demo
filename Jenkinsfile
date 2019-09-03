@@ -29,5 +29,10 @@ node('k8s-slave') {
             sh "sed -i 's/<BUILD_TAG>/${Tag}/' k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
         }
-     }        
+     }  else {
+        stage("Debug"){
+            echo "Tag: ${Tag}"
+            echo "Action: ${Action}"
+        }
+     }
 }
