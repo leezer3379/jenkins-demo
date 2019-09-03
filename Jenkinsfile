@@ -34,5 +34,12 @@ node('k8s-slave') {
             echo "Tag: ${Tag}"
             echo "Action: ${Action}"
         }
+    } else {
+
+        stage("Debug"){
+            echo "Tag: ${Tag}"
+            echo "Action: ${Action}"
+            echo "else"
+        }
     }
 }
