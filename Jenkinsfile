@@ -6,6 +6,7 @@ node('k8s-slave') {
             script {
                 build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
                 echo "${build_tag} sdeploying...."
+                echo -e "\033[32m[ tomcat started success on ${build_tag} !  ]\033[0m"
             }
         }
         stage('Build') {
