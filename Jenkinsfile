@@ -22,6 +22,7 @@ node('k8s-slave') {
             echo "4. Deploy Stage"
             sh "sed -i 's/<BUILD_TAG>/${build_tag}/g' k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
+            sh "grep -R 'registry-vpc.cn-beijing.aliyuncs.com' k8s.yaml| awk '{print \$4}' "
         }
     } else if("${env.Action}"=="rollback" && Tag!="") {
         stage("Rollback"){
@@ -31,18 +32,6 @@ node('k8s-slave') {
             sh "sed -i 's/<BUILD_TAG>/${Tag}/g' k8s.yaml"
             sh "cat k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
-        }
-    } else if (Tag=="123"){
-        stage("Debug"){
-            echo "Tag: ${Tag}"
-            echo "Action: ${Action}"
-        }
-    } else {
-
-        stage("Debug1"){
-            echo "Tag: ${params.Tag}"
-            echo "Action: ${params.Action}"
-            echo "else"
         }
     }
 }
