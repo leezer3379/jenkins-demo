@@ -7,7 +7,7 @@ spec:
   replicas: 3
   strategy:
     rollingUpdate:  ##由于replicas为3,则整个升级,pod个数在2-4个之间
-      maxSurge: 2      #滚动升级时会先启动1个pod
+      maxSurge: 1      #滚动升级时会先启动1个pod
       maxUnavailable: 1 #滚动升级时允许的最大Unavailable的pod个数
   template:
     metadata:
@@ -25,6 +25,13 @@ spec:
         env:
         - name: branch
           value: <BUILD_TAG>
+      readinessProbe:
+        httpGet:
+          path: /
+          port: 9090
+        initialDelaySeconds: 60
+        timeoutSeconds: 5
+        failureThreshold: 12
 
 ---
 apiVersion: v1
