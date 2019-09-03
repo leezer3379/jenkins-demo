@@ -25,13 +25,13 @@ spec:
         env:
         - name: branch
           value: <BUILD_TAG>
-      readinessProbe:
-        httpGet:
-          path: /
-          port: 9090
-        initialDelaySeconds: 60
-        timeoutSeconds: 5
-        failureThreshold: 12
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 9090
+          initialDelaySeconds: 60
+          timeoutSeconds: 5
+          failureThreshold: 12
 
 ---
 apiVersion: v1

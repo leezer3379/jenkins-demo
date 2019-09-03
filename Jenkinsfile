@@ -26,11 +26,9 @@ node('k8s-slave') {
         }
     } else if("${env.Action}"=="rollback" && Tag!="") {
         stage("Rollback"){
-            sh "cat k8s.yaml"
             checkout scm
             echo "${Tag} rollbacking...."
             sh "sed -i 's/<BUILD_TAG>/${Tag}/g' k8s.yaml"
-            sh "cat k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
         }
     }
