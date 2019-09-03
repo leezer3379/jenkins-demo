@@ -1,4 +1,8 @@
-echo Action
+if(Action=="deploy") {
+
+} else {
+    echo "${Action}"
+}
 // node('k8s-slave') {
 //     input message: '', parameters: [choice(choices: ['deploy', 'rollback'], description: 'xu', name: 'Action'), text(defaultValue: '', description: '', name: 'Tag')]
 //     if(params.Action=="delopy"){
