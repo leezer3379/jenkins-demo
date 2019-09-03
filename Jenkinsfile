@@ -20,13 +20,13 @@ node('k8s-slave') {
         }
         stage('Deploy') {
             echo "4. Deploy Stage"
-            sh "sed -i 's/<BUILD_TAG>/${build_tag}/' k8s.yaml"
+            sh "sed -i 's/<BUILD_TAG>/${build_tag}/g' k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
         }
     } else if("${env.Action}"=="rollback" && Tag!="") {
         stage("Rollback"){
             echo "${Tag} rollbacking...."
-            sh "sed -i 's/<BUILD_TAG>/${Tag}/' k8s.yaml"
+            sh "sed -i 's/<BUILD_TAG>/${Tag}/g' k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
         }
     } else if (Tag=="123"){

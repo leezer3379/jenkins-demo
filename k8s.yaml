@@ -24,7 +24,7 @@ spec:
           - containerPort: 9090
         env:
         - name: branch
-          value: "master"
+          value: <BUILD_TAG>
 
 ---
 apiVersion: v1
