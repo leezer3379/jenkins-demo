@@ -1,5 +1,5 @@
 node('k8s-slave') {
-    if(Action=="delop" && Tag==""){
+    if(Action=="delopy" && Tag==""){
         stage('Prepare') {
             echo "1.Prepare Stage"
             checkout scm
