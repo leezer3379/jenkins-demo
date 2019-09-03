@@ -38,8 +38,8 @@ node('k8s-slave') {
     } else {
 
         stage("Debug1"){
-            echo "Tag: ${env.Tag}"
-            echo "Action: ${env.Action}"
+            echo "Tag: ${params.Tag}"
+            echo "Action: ${params.Action}"
             echo "else"
         }
     }
