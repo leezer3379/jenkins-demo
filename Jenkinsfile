@@ -1,7 +1,7 @@
 node('k8s-slave') {
     echo Action
     echo env
-    if(Action=="delopy"){
+    if(env.Action=="delopy"){
         stage('Prepare') {
             echo "1.Prepare Stage"
             checkout scm
@@ -25,13 +25,13 @@ node('k8s-slave') {
             sh "sed -i 's/<BUILD_TAG>/${build_tag}/' k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
         }
-    } else if(Action=="rollback" && Tag!="") {
+    } else if(env.Action=="rollback" && env.Tag!="") {
         stage("Rollback"){
             echo "${Tag} rollbacking...."
             sh "sed -i 's/<BUILD_TAG>/${Tag}/' k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
         }
-    } else if (Tag=="123"){
+    } else if (env.Tag=="123"){
         stage("Debug"){
             echo "Tag: ${Tag}"
             echo "Action: ${Action}"
@@ -39,8 +39,8 @@ node('k8s-slave') {
     } else {
 
         stage("Debug"){
-            echo "Tag: ${Tag}"
-            echo "Action: ${Action}"
+            echo "Tag: ${env.Tag}"
+            echo "Action: ${env.Action}"
             echo "else"
         }
     }
