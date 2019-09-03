@@ -37,7 +37,7 @@ node('k8s-slave') {
         }
     } else {
 
-        stage("Debug"){
+        stage("Debug1"){
             echo "Tag: ${env.Tag}"
             echo "Action: ${env.Action}"
             echo "else"
