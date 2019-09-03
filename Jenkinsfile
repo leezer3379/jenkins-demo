@@ -1,6 +1,4 @@
 node('k8s-slave') {
-    echo Action
-    echo env
     if(env.Action=="delopy"){
         stage('Prepare') {
             echo "1.Prepare Stage"
