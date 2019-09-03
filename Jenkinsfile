@@ -1,10 +1,10 @@
-if("${env.Action}"=="delopy"){
+if("${Action}"=="sdeploy"){
     echo "OK"
 } else {
     echo "else"
 }
 // node('k8s-slave') {
-//     if("${env.Action}"=="delopy"){
+//     if("${env.Action}"=="sdeploy"){
 //         stage('Prepare') {
 //             echo "1.Prepare Stage"
 //             checkout scm
