@@ -6,7 +6,7 @@ node('k8s-slave') {
             script {
                 build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
                 ansiColor('xterm') {
-                    echo '\033[32m======================================\n${build_tag} sdeploying....\n====================================== \033[0m'
+                    echo "\033[32m======================================\n${build_tag} sdeploying....\n====================================== \033[0m"
                 }
             }
 
@@ -30,10 +30,9 @@ node('k8s-slave') {
     } else if("${env.Action}"=="rollback" && Tag!="") {
         stage("Rollback"){
             checkout scm
-            echo "======================================"
-            echo "${Tag} rollbacking...."
-            echo "======================================"
-
+            ansiColor('xterm') {
+                echo "\033[32m======================================\n${Tag} rollbacking....\n====================================== \033[0m"
+            }
             sh "sed -i 's/<BUILD_TAG>/${Tag}/g' k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
         }
