@@ -2,7 +2,7 @@ node('k8s-slave') {
     if("${env.Action}"=="sdeploy"){
         stage('下载代码') {
             ansiColor('xterm') {
-                echo '\033[32m下载代码\033[0m'
+                echo '\033[32m1. 下载代码\033[0m'
             }
             checkout scm
             script {
@@ -14,13 +14,13 @@ node('k8s-slave') {
         }
         stage('构建镜像') {
             ansiColor('xterm') {
-                echo '\033[32m构建镜像\033[0m'
+                echo '\033[32m2. 构建镜像\033[0m'
             }
             sh "docker build -t registry-vpc.cn-beijing.aliyuncs.com/sy-ops/jenkins-demo:${build_tag} ."
         }
         stage('上传镜像到阿里云') {
             ansiColor('xterm') {
-                echo '\033[32m上传镜像到阿里云\033[0m'
+                echo '\033[32m3. 上传镜像到阿里云\033[0m'
             }
             withCredentials([usernamePassword(credentialsId: 'dockerAliyun', passwordVariable: 'dockerAliyunPassword', usernameVariable: 'dockerAliyunUser')]) {
                 sh "docker login -u ${dockerAliyunUser} -p ${dockerAliyunPassword} registry-vpc.cn-beijing.aliyuncs.com"
@@ -29,7 +29,7 @@ node('k8s-slave') {
         }
         stage('部署项目到k8s') {
             ansiColor('xterm') {
-                echo '\033[32m部署项目到k8s\033[0m'
+                echo '\033[32m4. 部署项目到k8s\033[0m'
             }
             sh "sed -i 's/<BUILD_TAG>/${build_tag}/g' k8s.yaml"
             sh "kubectl apply -f k8s.yaml --record"
@@ -37,7 +37,7 @@ node('k8s-slave') {
     } else if("${env.Action}"=="rollback" && Tag!="") {
         stage("回滚"){
             ansiColor('xterm') {
-                echo '\033[32m回滚\033[0m'
+                echo '\033[32m1. 回滚\033[0m'
             }
             checkout scm
             ansiColor('xterm') {
