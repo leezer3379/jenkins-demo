@@ -5,11 +5,11 @@ node('k8s-slave') {
             checkout scm
             script {
                 build_tag = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
-                echo "======================================"
-                echo "${build_tag} sdeploying...."
-                echo "======================================"
-
+                ansiColor('xterm') {
+                    echo '\033[32m======================================\n${build_tag} sdeploying....\n====================================== \033[0m'
+                }
             }
+
         }
         stage('Build') {
             echo "2.Build Docker Image Stage"
